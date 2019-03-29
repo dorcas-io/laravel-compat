@@ -14,7 +14,7 @@
   "require": {
     "php": ">=5.6.4",
     "illuminate/auth": "~5.5",
-    "dorcas/dorcas-sdk-php": "dev-master",
+    "dorcas/sdk-php-laravel": "dev-master",
     "illuminate/notifications": "~5.5"
   },
   "require-dev": {
