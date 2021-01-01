@@ -138,9 +138,9 @@ class DorcasUserProvider implements UserProvider
         }
         $user = $response->getData();
         # get the actual user data
-        Cookie::queue('store_id', $user['id'], 24 * 60);
+        Cookie::queue('store_id', $user['id'], 24 * 60 * 60);
         # set the user id cookie
-        Cache::put('dorcas.auth_token.'.$user['id'], $token, 24 * 60);
+        Cache::put('dorcas.auth_token.'.$user['id'], $token, 24 * 60 * 60);
         # save the auth token to the cache
         if (!empty($response->meta)) {
             $user = array_merge($user, ['meta' => $response->meta]);
@@ -172,9 +172,9 @@ class DorcasUserProvider implements UserProvider
         }
         $user = $response->getData();
         # get the actual user data
-        Cookie::queue('store_id', $user['id'], 24 * 60);
+        Cookie::queue('store_id', $user['id'], 24 * 60 * 60);
         # set the user id cookie
-        Cache::put('dorcas.auth_token.'.$user['id'], $token, 24 * 60);
+        Cache::put('dorcas.auth_token.'.$user['id'], $token, 24 * 60 * 60);
         # save the auth token to the cache
         if (!empty($response->meta)) {
             $user = array_merge($user, ['meta' => $response->meta]);
