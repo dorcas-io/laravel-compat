@@ -76,10 +76,7 @@ class DorcasUserProvider implements UserProvider
      */
     public function retrieveByToken($identifier, $token)
     {
-        /*$apiAuthToken = Cache::get('dorcas.auth_token.'.$identifier, null);
-        if (!empty($apiAuthToken)) {
-            $this->sdk->setAuthorizationToken($apiAuthToken);
-        }*/
+        
         $resource = $this->sdk->createUserResource($identifier);
         $response = $resource->relationships('company')
                                 ->addQueryArgument('select_using', 'email')
@@ -106,10 +103,6 @@ class DorcasUserProvider implements UserProvider
      */
     public function updateRememberToken(Authenticatable $user, $token)
     {
-        /*$apiAuthToken = Cache::get('dorcas.auth_token.'.$user->getAuthIdentifier(), null);
-        if (!empty($apiAuthToken)) {
-            $this->sdk->setAuthorizationToken($apiAuthToken);
-        }*/
         $resource = $this->sdk->createUserResource($user->getAuthIdentifier());
         $resource->addBodyParam('token', $token)->send('put');
     }
@@ -125,6 +118,7 @@ class DorcasUserProvider implements UserProvider
     public function retrieveByCredentials(array $credentials)
     {
         $token = login_via_password($this->sdk, $credentials['email'] ?? '', $credentials['password'] ?? '');
+        //dd($token);
         # we get the authentication token
         if ($token instanceof DorcasResponse) {
             return null;
@@ -133,6 +127,7 @@ class DorcasUserProvider implements UserProvider
         # set the authorization token
         $service = $this->sdk->createProfileService();
         $response = $service->addQueryArgument('include', 'company')->send('get');
+        //dd($response);
         if (!$response->isSuccessful()) {
             return null;
         }
@@ -145,6 +140,7 @@ class DorcasUserProvider implements UserProvider
         if (!empty($response->meta)) {
             $user = array_merge($user, ['meta' => $response->meta]);
         }
+        //dd(array($user,new DorcasUser($user, $this->sdk)));
         return new DorcasUser($user, $this->sdk);
     }
     
