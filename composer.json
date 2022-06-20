@@ -17,7 +17,6 @@
   ],
   "require": {
     "php": "^7.4|8.1.7",
-    "illuminate/auth": "^9.0" ,
     "dorcas/sdk-php-laravel": "dev-dev-ola",
     "illuminate/notifications": "^8.0"
   },
