@@ -16,7 +16,7 @@
     }
   ],
   "require": {
-    "php": "^7.2|^8.0|^8.1",
+    "php": "^7.2|^8.0|^8.1|^8.2",
     "dorcas/sdk-php-laravel": "dev-master"
   },
   "require-dev": {
